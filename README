@@ -1,0 +1,16 @@
+
+
+
+
+
+2. Requirements(pip3):
+	- localhost testing(no docker)
+		* redis-server
+		* python3
+	- python (pip3)
+		* flask
+		* redis
+		* rq (python workers)
+
+
+
