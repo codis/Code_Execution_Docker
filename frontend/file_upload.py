@@ -38,10 +38,10 @@ def upload_file():
 
 			# announce backend to run task
 			post_data = {
-				'arg': 2,
+				'arg': filename,
 			}
 
-			response = requests.post('http://127.0.0.1:5001/enqueue', data = post_data)
+			response = requests.post('http://queue:5001/enqueue', data = post_data)
 			print(response.json(), response.status_code)
 
 			return render_template('succes_upload.html')
@@ -49,4 +49,4 @@ def upload_file():
 	return render_template('upload.html')
 
 if __name__ == '__main__':
-	app.run(debug = True)
+	app.run(debug = True, host='0.0.0.0', port = 5000)

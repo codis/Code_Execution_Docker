@@ -1,6 +1,26 @@
 
 
 
+1. 	Because every microservice will be in a seperate container
+		, we will create a different requirements.txt for each folder
+		(backend, frontend) and Dockerfile
+	The yml file describes each service from where to build (ex: ./backend)
+		which means that it will look for the Dockerfile inside it.
+		By using COPY . /service, we copy what is inside (/backend), which
+		contains the code and requirement.txt and by setting Workdir /service
+		we offer the space from where to install requirements and run service.
+
+	File_upload.py and queue_request.py use the service name (described in
+		the yml file) in order to get the IP address for the docker container. 
+
+	Depends on settles which services to be started first
+
+	build: folder
+
+
+
+redis-cli
+MONITOR (poti rula direct worker.py)
 
 
 2. Requirements(pip3):

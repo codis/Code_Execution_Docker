@@ -1,0 +1,55 @@
+version: '2'
+
+services:
+    web:
+        build: ./frontend    
+        volumes:
+            - uploads:/uploads
+        ports:
+            - "5000:5000"
+        command: python3 file_upload.py
+        depends_on:
+            - queue
+    queue:
+        build: ./backend/queue
+        #volumes:
+        #    - upload_location:/backend/queue/uploads
+
+        command: python3 queue_request.py
+        depends_on:
+            - redis
+    worker:
+        build: ./backend/worker
+        command: python3 worker.py
+        depends_on:
+            - redis
+            - queue
+
+    dashboard:
+        build: ./dashboard
+        image: dashboard
+        container_name: dashboard
+        ports:
+            - '9181:9181'
+        command: rq-dashboard -H redis
+
+    redis:
+        image: redis:4.0.11-alpine
+
+volumes:
+    uploads:
+
+#volumes:
+#    upload_location:
+
+  #python:
+    #environment:
+    #  - DEBUG_DATA_FLOW=true
+    #build: .
+    #image: python:3
+    #depends_on:
+    #  - mqtt_broker
+    #  - influxdb
+    #networks:
+    #  - broker
+    #  - python-influxdb

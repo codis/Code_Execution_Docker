@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+  python:
+    #environment:
+    #  - DEBUG_DATA_FLOW=true
+    build: .
+    image: python:3
+    #depends_on:
+    #  - mqtt_broker
+    #  - influxdb
+    #networks:
+    #  - broker
+    #  - python-influxdb

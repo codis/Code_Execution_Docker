@@ -3,5 +3,5 @@
 import time
 
 def create_task(arg):
-    time.sleep(int(arg))
+    time.sleep(3)
     return True
